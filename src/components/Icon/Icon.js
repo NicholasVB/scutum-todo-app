@@ -1,7 +1,7 @@
-export function Icon() {
+export function Icon({onClick, imgLink, alt}) {
     return (
-        <div>
-            Icon component
+        <div onClick={onClick}>
+            <img src={imgLink} alt={alt}/>
         </div>
     )
 }
