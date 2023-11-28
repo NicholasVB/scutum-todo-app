@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { TodoList } from "./components/TodoList/TodoList"
+import { Pagination } from "./components/Pagination/Pagination"
 import './App.css';
 
 async function getTodos (url) {
@@ -28,7 +30,8 @@ function App() {
 
   return (
     <div>
-      {todoList.map(todo => <li key={todo.id}>{todo.title}</li>)}
+      <TodoList todoList={todoList}/>
+      <Pagination />
     </div>
   );
 }
