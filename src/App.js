@@ -9,29 +9,28 @@ async function getTodos (url) {
   return data;
 }
 
-
 function App() {
   const [todoList, setTodoList] = useState([]);
+  const [renderTodoList, setRenderTodoList] = useState([]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getTodos('https://jsonplaceholder.typicode.com/todos?_limit=20');
+        const data = await getTodos('https://jsonplaceholder.typicode.com/todos?_limit=120');
         setTodoList(data);
       } catch (error) {
         console.log(error);
       }
-    };
+    }
 
     fetchData();
     
-  }, []);
-
-  
+  }, []);  
 
   return (
     <div>
-      <TodoList todoList={todoList}/>
-      <Pagination />
+      <TodoList todoList={renderTodoList}/>
+      <Pagination todoList={todoList} setRenderPage={setRenderTodoList}/>
     </div>
   );
 }
