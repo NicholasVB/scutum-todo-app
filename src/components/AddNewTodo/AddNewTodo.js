@@ -10,16 +10,27 @@ export function AddNewTodo ({id, title=""}) {
     const [todoText, setTodoText] = useState(title);
     const dispatch = useDispatch();
     return(
-        <Box key={id}>
+        <Box key={id}
+        sx={{
+            display: "flex",
+            width: "100%",
+            columnGap: "15px",
+            alignItems: "center",
+        }}
+        >
             <TextField 
+                sx={{
+                    width: "100%",
+                }}
                 id="standard-basic" 
                 value={todoText}
                 onChange={(event) => { setTodoText(event.target.value) }} 
             />
-           <AddSharp onClick={() => {
+            <AddSharp onClick={() => {
                 dispatch(addTodo({ todoId: id, newText: todoText}))
                 setTodoText("")
-                }} />            
+                }} 
+            />            
         </Box>
     )
 }

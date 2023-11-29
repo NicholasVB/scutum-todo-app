@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Icon } from "../Icon/Icon";
 import { useDispatch } from "react-redux";
+import "./Pagination.scss"
 
 export function Pagination({todoList, setRenderPage}) {
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export function Pagination({todoList, setRenderPage}) {
     }
 
     return(
-        <div>
+        <div className="pagination"> 
             <Icon onClick={() => {paginate(currentPage - 1)}} imgLink="/icons/arrow-bottom.svg" />
             <div>
                 <p>{currentPage} of {max}</p>

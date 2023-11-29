@@ -22,11 +22,25 @@ const todosSlice = createSlice({
 			state.renderList = action.payload;
 		},
         addTodo: (state, action) => {
-            state.listOfTodos = [...state.listOfTodos, action.payload]
+            const { todoId, newText } = action.payload;
+            return {
+                ...state,
+                listOfTodos: [...state.listOfTodos, { id: todoId, title: newText }]
+            };
         },
-        // deleteTodo: (state, action) => {
-        //     state.listOfTodos = [...state.listOfTodos, action.payload]
-        // }
+        updateTodo: (state, action) => {
+            const { todoId, newText } = action.payload;
+            state.listOfTodos = state.listOfTodos.map(
+                todo => todo.id === todoId ? { ...todo, title: newText } : todo
+            )            
+        },
+        deleteTodo: (state, action) => {
+            console.log(action.payload);
+            return {
+                ...state,
+                listOfTodos: state.listOfTodos.filter(todo => todo.id !== action.payload)
+            };
+        }
     },
 	extraReducers: {
 		[fetchAllTodos.pending]: (state) => {
@@ -41,5 +55,5 @@ const todosSlice = createSlice({
 		},
 	},
 });
-export const { setRenderList, addTodo } = todosSlice.actions;
+export const { setRenderList, addTodo, updateTodo, deleteTodo } = todosSlice.actions;
 export default todosSlice.reducer;

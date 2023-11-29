@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { DeleteSharp, AddSharp } from '@mui/icons-material';
+import { DeleteSharp, AddSharp, WidthFull } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import { addTodo, updateTodo, deleteTodo } from '../../redux/slices/todosList';
 
@@ -10,8 +10,18 @@ export function TodoItem ({id, title="", isDelete=true}) {
     // const [todoText, setTodoText] = useState(title);
     const dispatch = useDispatch();
     return(
-        <Box key={id}>
+        <Box key={id} sx={{
+            width: "100%",
+            display: "flex",
+            flex: "1 1 auto",
+            columnGap: "15px",
+            alignItems: "center",
+
+        }}>
             <TextField 
+                sx={{
+                    width: "100%"
+                }}
                 id="standard-basic" 
                 // value={todoText}
                 value={title}
