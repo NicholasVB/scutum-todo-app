@@ -1,37 +1,30 @@
 import { useEffect, useState } from 'react';
 import { TodoList } from "./components/TodoList/TodoList"
 import { Pagination } from "./components/Pagination/Pagination"
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllTodos, setRenderList } from './redux/slices/todosList';
 import './App.css';
 
-async function getTodos (url) {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
-}
-
 function App() {
-  const [todoList, setTodoList] = useState([]);
-  const [renderTodoList, setRenderTodoList] = useState([]);
+  const {listOfTodos, renderList, status} = useSelector(state => state.todosList);
+  const dispatch = useDispatch();
   
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getTodos('https://jsonplaceholder.typicode.com/todos?_limit=120');
-        setTodoList(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    fetchData();
-    
+    dispatch(fetchAllTodos());
   }, []);  
 
   return (
-    <div>
-      <TodoList todoList={renderTodoList}/>
-      <Pagination todoList={todoList} setRenderPage={setRenderTodoList}/>
-    </div>
+    <>
+      {
+        status === "Loading" 
+        ? <div>Loading...</div> 
+        :<div>
+          <TodoList todoList={renderList}/>
+          <Pagination todoListLength={listOfTodos.length} todoList={listOfTodos} setRenderPage={setRenderList}/>
+        </div>
+      }
+    </>
+
   );
 }
 
