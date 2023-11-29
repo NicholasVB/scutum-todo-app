@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { Icon } from "../Icon/Icon";
+import { useDispatch } from "react-redux";
 
 export function Pagination({todoList, setRenderPage}) {
+    const dispatch = useDispatch();
     const todoListLength = todoList.length;
     const ChankSize = 10;
     const max = Math.ceil(todoListLength/ChankSize);
@@ -12,7 +14,7 @@ export function Pagination({todoList, setRenderPage}) {
         const startPoiner = endPoiner - ChankSize;
         const renderPage = todoList.slice(startPoiner, endPoiner);
 
-        setRenderPage(renderPage);
+        dispatch(setRenderPage(renderPage));
 
     }, [currentPage, todoList]);
     
