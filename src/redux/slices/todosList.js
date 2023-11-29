@@ -18,9 +18,6 @@ const todosSlice = createSlice({
 		status: null,	
 	},
 	reducers: {
-        // setListOfTodos: (state, action) => {
-		// 	state.listOfTodos = action.payload;
-		// },
 		setRenderList: (state, action) => {
 			state.renderList = action.payload;
 		},
