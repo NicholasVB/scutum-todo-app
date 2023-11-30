@@ -7,10 +7,14 @@ export function Pagination({todoList, setRenderPage}) {
     const dispatch = useDispatch();
     const todoListLength = todoList.length;
     const ChankSize = 10;
-    const max = Math.ceil(todoListLength/ChankSize);
+    // fix bug 0 of 0. When we delete all todo. Then max = 0 and we set it in 1
+    const max = Math.ceil(todoListLength/ChankSize) || 1;
     const [currentPage, setCurrentPage] = useState(1);
     
     useEffect(() => {
+        // fix bug when we delete all todo in chunk and see for example 5 of 4
+        if (currentPage > max) { setCurrentPage(max)}
+
         const endPoiner = currentPage * ChankSize;
         const startPoiner = endPoiner - ChankSize;
         const renderPage = todoList.slice(startPoiner, endPoiner);
