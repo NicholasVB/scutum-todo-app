@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Icon } from "../Icon/Icon";
+// import { Icon } from "../Icon/Icon";
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import { useDispatch } from "react-redux";
 import "./Pagination.scss"
 
@@ -30,11 +31,11 @@ export function Pagination({todoList, setRenderPage}) {
 
     return(
         <div className="pagination"> 
-            <Icon onClick={() => {paginate(currentPage - 1)}} imgLink="/icons/arrow-bottom.svg" />
+            <ArrowBackIos onClick={() => {paginate(currentPage - 1)}} imgLink="/icons/arrow-bottom.svg" />
             <div>
                 <p>{currentPage} of {max}</p>
             </div>
-            <Icon onClick={() => {paginate(currentPage + 1)}} imgLink="/icons/arrow-bottom.svg" /> 
+            <ArrowForwardIos onClick={() => {paginate(currentPage + 1)}} imgLink="/icons/arrow-bottom.svg" /> 
         </div>
     )
 }
