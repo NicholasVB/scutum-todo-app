@@ -1,39 +1,35 @@
-import { useState } from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { DeleteSharp, AddSharp, WidthFull } from '@mui/icons-material';
+import { Box, TextField } from '@mui/material';
+import styled from '@emotion/styled';
+import { DeleteSharp } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-import { addTodo, updateTodo, deleteTodo } from '../../redux/slices/todosList';
+import { updateTodo, deleteTodo } from '../../redux/slices/todosList';
 
+const StyledBox  = styled(Box)`
+    width: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    column-gap: 15px;
+    align-items: center;
+`;
 
-export function TodoItem ({id, title="", isDelete=true}) {
-    // const [todoText, setTodoText] = useState(title);
+const StyledTextField  = styled(TextField)`
+    width: 100%;
+`;
+
+export function TodoItem ({id, title="", orderNumber}) {
     const dispatch = useDispatch();
-    return(
-        <Box key={id} sx={{
-            width: "100%",
-            display: "flex",
-            flex: "1 1 auto",
-            columnGap: "15px",
-            alignItems: "center",
 
-        }}>
-            <TextField 
-                sx={{
-                    width: "100%"
-                }}
-                id="standard-basic" 
-                // value={todoText}
+    return(
+        <StyledBox 
+        // these classes are needed so that the last element in chank occupies 2 columns
+        className={`${orderNumber % 2 ? "odd" : "even"}`}
+        >
+            <StyledTextField 
+                id="standard-basic"
                 value={title}
-                onChange={(event) => { dispatch(updateTodo({ todoId: id, newText: event.target.value })) }} 
-                // onChange={(event) => { setTodoText(event.target.value) }} 
+                onChange={(event) => { dispatch(updateTodo({ todoId: id, newText: event.target.value })) }}
             />
-            {/* {isDelete 
-                ?  */}
-                <DeleteSharp onClick={() => {dispatch(deleteTodo(id))}} />
-            {/* //     : <AddSharp onClick={(event) => {dispatch(addTodo({ todoId: id, newText: event.target.value }))}} />
-            // }  */}
-            
-        </Box>
+            <DeleteSharp onClick={() => {dispatch(deleteTodo(id))}} />
+        </StyledBox>
     )
 }

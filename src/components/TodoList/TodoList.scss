@@ -1,7 +1,11 @@
 .todolist {
     display: grid;
     width: 100%;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr;
     column-gap: 30px;
     row-gap: 15px;
+}
+
+.todolist .odd:last-child {
+    grid-column: span 2;
 }
