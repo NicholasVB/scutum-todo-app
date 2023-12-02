@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react';
-import { TodoList } from "./components/TodoList/TodoList"
-import { Pagination } from "./components/Pagination/Pagination"
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllTodos, setRenderList } from './redux/slices/todosList';
-import { AddNewTodo } from './components/AddNewTodo/AddNewTodo';
+import { AddNewTodo, TodoList, Pagination } from "./components";
 import './App.scss';
 
 function App() {
-  const {listOfTodos, renderList, status} = useSelector(state => state.todosList);
+  const { listOfTodos, renderList, status } = useSelector(state => state.todosList);
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -20,9 +18,13 @@ function App() {
         status === "Loading" 
         ? <div>Loading...</div> 
         :<div className='content__body'>
-          <TodoList todoList={renderList}/>
-          <AddNewTodo placeholder={"New Todo"} id={new Date().getTime()}/>
-          <Pagination todoListLength={listOfTodos.length} todoList={listOfTodos} setRenderPage={setRenderList}/>
+          <TodoList todoList={ renderList }/>
+          <AddNewTodo placeholder={ "New Todo" } id={ new Date().getTime() }/>
+          <Pagination 
+            todoListLength={ listOfTodos.length } 
+            todoList={ listOfTodos } 
+            setRenderPage={ setRenderList }
+          />
         </div>
       }
     </>
