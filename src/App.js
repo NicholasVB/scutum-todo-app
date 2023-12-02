@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllTodos, setRenderList } from './redux/slices/todosList';
+import { fetchAllTodos } from './redux/slices/todosList';
 import { AddNewTodo, TodoList, Pagination } from "./components";
 import './App.scss';
 
@@ -22,8 +22,7 @@ function App() {
           <AddNewTodo placeholder={ "New Todo" } id={ new Date().getTime() }/>
           <Pagination 
             todoListLength={ listOfTodos.length } 
-            todoList={ listOfTodos } 
-            setRenderPage={ setRenderList }
+            todoList={ listOfTodos }
           />
         </div>
       }
