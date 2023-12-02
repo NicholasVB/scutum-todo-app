@@ -1,36 +1,37 @@
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import { Box, TextField } from '@mui/material';
+import styled from '@emotion/styled';
 import { AddSharp } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-import { addTodo} from '../../redux/slices/todosList';
+import { addTodo } from '../../redux/slices/todosList';
 
+const StyledBox  = styled(Box)`
+  display: flex;
+  width: 100%;
+  column-gap: 15px;
+  align-items: center;
+`;
 
-export function AddNewTodo ({id, title=""}) {
-    const [todoText, setTodoText] = useState(title);
+const StyledTextField = styled(TextField)`
+    width: 100%
+`;
+
+export function AddNewTodo ({id, placeholder}) {
+    const [todoText, setTodoText] = useState("");
     const dispatch = useDispatch();
     return(
-        <Box key={id}
-        sx={{
-            display: "flex",
-            width: "100%",
-            columnGap: "15px",
-            alignItems: "center",
-        }}
-        >
-            <TextField 
-                sx={{
-                    width: "100%",
-                }}
-                id="standard-basic" 
+        <StyledBox key={id}>
+            <StyledTextField
+                id="standard-basic"
+                placeholder={placeholder} 
                 value={todoText}
                 onChange={(event) => { setTodoText(event.target.value) }} 
             />
             <AddSharp onClick={() => {
                 dispatch(addTodo({ todoId: id, newText: todoText}))
                 setTodoText("")
-                }} 
+                }}
             />            
-        </Box>
+        </StyledBox>
     )
 }
