@@ -1,0 +1,15 @@
+services:
+  scutum-todo-app:
+    container_name: scutum-todo-app
+    image: scutum-todo-app-image
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      target: development
+    volumes:
+      - .:/usr/src/scutum-todo-app
+      - /usr/src/scutum-todo-app/node_modules
+    ports:
+      - 3000:3000
+    command: ["npm", "start"]
